@@ -1,9 +1,9 @@
-class UserModel {
+class User {
   final String accountId;
   final String name;
   final String profileImage;
 
-  UserModel({
+  User({
     this.accountId,
     this.name,
     this.profileImage,
