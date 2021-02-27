@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:fremo_app/models/bottomNavbar.dart';
 
@@ -6,8 +7,20 @@ import 'package:fremo_app/pages/home.dart';
 import 'package:fremo_app/pages/myMemo.dart';
 import 'package:fremo_app/pages/myInfo.dart';
 
+import 'package:fremo_app/providers/user.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(
+    // MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>(
+          create: (_) => UserProvider(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
