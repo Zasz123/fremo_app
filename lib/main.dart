@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _pageList = [
     HomePage(),
     MyMemo(),
-    MyInfo(),
+    MyInfoScreen(),
   ];
 
   void _onChangePage(int pagenIdex) {
