@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserProvider with ChangeNotifier {
-  String _token;
+  User _user;
 
-  UserProvider([String token]) {
-    this._token = token ?? null;
+  UserProvider([User user]) {
+    this._user = user ?? null;
   }
 
-  String getToken() => this._token;
+  User getUser() => this._user;
 
-  void setToken(String newToken) {
-    this._token = newToken;
+  void setUser(User newUser) {
+    this._user = newUser;
     notifyListeners();
   }
 }
