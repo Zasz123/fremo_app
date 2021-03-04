@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fremo_app/providers/user.dart';
 
 import 'package:fremo_app/widgets/common/CustomFormWidget.dart';
+import 'package:provider/provider.dart';
 
 class MyInfoForm extends StatefulWidget {
   @override
@@ -12,6 +14,9 @@ class _MyInfoFormState extends State<MyInfoForm> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider _userProvider = Provider.of<UserProvider>(context);
+    String _email = _userProvider.user == null ? "" : _userProvider.user.email;
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Form(
@@ -45,6 +50,8 @@ class _MyInfoFormState extends State<MyInfoForm> {
               height: 10.0,
             ),
             CustomInput(
+              readOnly: true,
+              initialValue: _email,
               placeholder: "이메일",
               validatorFunction: (value) {
                 if (value.isEmpty) {
