@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:fremo_app/models/bottomNavbar.dart';
 
@@ -6,8 +8,24 @@ import 'package:fremo_app/pages/home.dart';
 import 'package:fremo_app/pages/myMemo.dart';
 import 'package:fremo_app/pages/myInfo.dart';
 
-void main() {
-  runApp(MyApp());
+import 'package:fremo_app/providers/user.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
+  runApp(
+    // MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>(
+          create: (_) => UserProvider(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -52,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _pageList = [
     HomePage(),
     MyMemo(),
-    MyInfo(),
+    MyInfoScreen(),
   ];
 
   void _onChangePage(int pagenIdex) {
