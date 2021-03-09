@@ -33,19 +33,35 @@ class CustomInput extends StatelessWidget {
           color: Color(0xffe2e2e2),
           fontSize: 18.0,
         ),
-        filled: readOnly,
-        fillColor: readOnly ? Color(0xffe2e2e2) : null,
+        filled: true,
+        fillColor: readOnly ? Color(0xffe2e2e2) : Colors.white,
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        border: const OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Color(0xff707070),
-            width: 2.0,
-          ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.0),
+          borderSide: readOnly
+              ? BorderSide.none
+              : BorderSide(
+                  color: Color(0xffe2e2e2),
+                  width: 1.0,
+                ),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Color(0xff707070),
-          ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.0),
+          borderSide: readOnly
+              ? BorderSide.none
+              : BorderSide(
+                  color: Color(0xffe2e2e2),
+                  width: 1.0,
+                ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.0),
+          borderSide: readOnly
+              ? BorderSide.none
+              : BorderSide(
+                  color: Colors.grey,
+                  width: 1.0,
+                ),
         ),
       ),
       validator: validatorFunction,
