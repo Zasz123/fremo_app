@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:fremo_app/providers/user.dart';
 
 import 'package:fremo_app/widgets/common/CustomFormWidget.dart';
-import 'package:provider/provider.dart';
+import 'package:fremo_app/widgets/common/CustomButton.dart';
 
 class MyInfoForm extends StatefulWidget {
   @override
@@ -17,59 +19,55 @@ class _MyInfoFormState extends State<MyInfoForm> {
     UserProvider _userProvider = Provider.of<UserProvider>(context);
     String _email = _userProvider.user == null ? "" : _userProvider.user.email;
 
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            CustomInput(
-              placeholder: "아이디",
-              validatorFunction: (value) {
-                if (value.isEmpty) {
-                  return '아이디가 비었습니다.';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            CustomInput(
-              placeholder: "이름",
-              validatorFunction: (value) {
-                if (value.isEmpty) {
-                  return '이름이 비었습니다.';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            CustomInput(
-              readOnly: true,
-              initialValue: _email,
-              placeholder: "이메일",
-              validatorFunction: (value) {
-                if (value.isEmpty) {
-                  return '이메일이 비었습니다.';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            SizedBox(
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          CustomInput(
+            readOnly: true,
+            initialValue: _email,
+            placeholder: "이메일",
+            validatorFunction: (value) {
+              if (value.isEmpty) {
+                return '이메일이 비었습니다.';
+              } else {
+                return null;
+              }
+            },
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          CustomInput(
+            placeholder: "아이디",
+            validatorFunction: (value) {
+              if (value.isEmpty) {
+                return '아이디가 비었습니다.';
+              } else {
+                return null;
+              }
+            },
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          CustomInput(
+            placeholder: "이름",
+            validatorFunction: (value) {
+              if (value.isEmpty) {
+                return '이름이 비었습니다.';
+              } else {
+                return null;
+              }
+            },
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          SizedBox(
               height: 40.0,
               width: double.infinity,
-              child: RaisedButton(
-                elevation: 0,
-                color: Color(0xff95C7AE),
+              child: CustomDefaultButton(
                 child: Text(
                   "수정",
                   style: TextStyle(
@@ -87,10 +85,8 @@ class _MyInfoFormState extends State<MyInfoForm> {
                     );
                   }
                 },
-              ),
-            )
-          ],
-        ),
+              ))
+        ],
       ),
     );
   }
