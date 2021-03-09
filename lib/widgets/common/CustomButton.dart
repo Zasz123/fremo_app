@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomDefaultButton extends StatelessWidget {
   final Widget child;
-  final Function onPressd;
+  final Function onPressed;
 
-  CustomDefaultButton({this.child, this.onPressd});
+  CustomDefaultButton({this.child, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CustomDefaultButton extends StatelessWidget {
       ),
       color: Color(0xff95C7AE),
       child: this.child,
-      onPressed: this.onPressd,
+      onPressed: this.onPressed,
     );
   }
 }
