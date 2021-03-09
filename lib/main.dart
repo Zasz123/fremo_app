@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fremo_app/models/bottomNavbar.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: const Color(0xff95C7AE),
       ),
       home: MyHomePage(title: 'Fremo'),
     );
@@ -81,6 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   BottomNavigationBar _bottomNavbarBuilder() {
     return BottomNavigationBar(
+      backgroundColor: Color(0xff8FBFA7),
+      selectedItemColor: Color(0xffe2e2e2),
+      unselectedItemColor: Color(0xffe2e2e2),
+      elevation: 0.0,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: _onChangePage,
@@ -105,6 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
       ),
       body: _pageBuilder(_selectedPageIndex),
       bottomNavigationBar: _bottomNavbarBuilder(),
