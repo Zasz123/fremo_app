@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 import 'package:fremo_app/models/bottomNavbar.dart';
 
-import 'package:fremo_app/pages/home.dart';
-import 'package:fremo_app/pages/myMemo.dart';
-import 'package:fremo_app/pages/myInfo.dart';
+import 'package:fremo_app/pages/home/home.dart';
+import 'package:fremo_app/pages/myMemo/myMemo.dart';
+import 'package:fremo_app/pages/myInfo/myInfo.dart';
 
 import 'package:fremo_app/providers/user.dart';
 
