@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fremo_app/providers/apiProvider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fremo_app/models/bottomNavbar.dart';
@@ -16,16 +17,26 @@ void main() async {
 
   await Firebase.initializeApp();
 
+  UserProvider userProvider = UserProvider();
+  MemoProvider memoProvider = MemoProvider();
+  ApiProvider apiProvider = ApiProvider();
+
   runApp(
     // MyApp(),
     MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(
-          create: (_) => UserProvider(),
+          create: (_) => userProvider,
         ),
-        ChangeNotifierProvider<MemoProvider>(
-          create: (_) => MemoProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => memoProvider),
+        ChangeNotifierProxyProvider<UserProvider, ApiProvider>(
+          create: (BuildContext context) => apiProvider,
+          update: (BuildContext context, UserProvider _userProvider,
+              ApiProvider _apiProvider) {
+            _apiProvider.setUser = _userProvider.user;
+            return _apiProvider;
+          },
+        )
       ],
       child: MyApp(),
     ),
