@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fremo_app/models/bottomNavbar.dart';
@@ -10,6 +9,7 @@ import 'package:fremo_app/pages/myMemo/myMemo.dart';
 import 'package:fremo_app/pages/myInfo/myInfo.dart';
 
 import 'package:fremo_app/providers/user.dart';
+import 'package:fremo_app/providers/memoProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +22,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider<UserProvider>(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider<MemoProvider>(
+          create: (_) => MemoProvider(),
         ),
       ],
       child: MyApp(),
