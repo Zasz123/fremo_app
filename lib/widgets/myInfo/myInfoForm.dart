@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:fremo_app/providers/user.dart';
+import 'package:fremo_app/providers/userProvider.dart';
 
 import 'package:fremo_app/widgets/common/CustomFormWidget.dart';
 import 'package:fremo_app/widgets/common/CustomButton.dart';
@@ -64,28 +64,25 @@ class _MyInfoFormState extends State<MyInfoForm> {
           SizedBox(
             height: 15.0,
           ),
-          SizedBox(
-              height: 40.0,
-              width: double.infinity,
-              child: CustomDefaultButton(
-                child: Text(
-                  "수정",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+          CustomDefaultButton(
+            child: Text(
+              "수정",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onPressed: () {
+              if (_formKey.currentState.validate()) {
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("data is valid!"),
                   ),
-                ),
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("data is valid!"),
-                      ),
-                    );
-                  }
-                },
-              ))
+                );
+              }
+            },
+          )
         ],
       ),
     );
