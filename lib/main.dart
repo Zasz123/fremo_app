@@ -8,7 +8,7 @@ import 'package:fremo_app/pages/home/home.dart';
 import 'package:fremo_app/pages/myMemo/myMemo.dart';
 import 'package:fremo_app/pages/myInfo/myInfo.dart';
 
-import 'package:fremo_app/providers/user.dart';
+import 'package:fremo_app/providers/userProvider.dart';
 import 'package:fremo_app/providers/memoProvider.dart';
 
 void main() async {
