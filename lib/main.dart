@@ -120,14 +120,34 @@ class _MyHomePageState extends State<MyHomePage> {
     return _pageList[selectedPage];
   }
 
+  AppBar _appBarBuilder() {
+    return AppBar(
+      title: Text(widget.title),
+      elevation: 0.0,
+      backgroundColor: Colors.transparent,
+      actions: [
+        PopupMenuButton(
+          icon: Icon(Icons.more_vert),
+          itemBuilder: (BuildContext context) {
+            return <PopupMenuItem>[
+              PopupMenuItem(
+                child: Text("설정"),
+              ),
+              PopupMenuItem(
+                // TODO: 워딩 수정
+                child: Text("앱 설명"),
+              ),
+            ];
+          },
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: _appBarBuilder(),
       body: _pageBuilder(_selectedPageIndex),
       bottomNavigationBar: _bottomNavbarBuilder(),
     );
