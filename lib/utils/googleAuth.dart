@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,8 +23,4 @@ Future<User> googleLogin() async {
   } catch (_) {
     rethrow;
   }
-}
-
-Future<void> googleLogout() async {
-  await FirebaseAuth.instance.signOut();
 }
