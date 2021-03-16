@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 import 'package:fremo_app/providers/userProvider.dart';
 import 'package:fremo_app/widgets/myInfo/myInfoProfile.dart';
 import 'package:fremo_app/widgets/myInfo/myInfoForm.dart';
 import 'package:fremo_app/widgets/myInfo/myInfoLogin.dart';
-
 import 'package:fremo_app/widgets/common/CustomWidgetWrapper.dart';
 
 class MyInfoScreen extends StatelessWidget {
