@@ -8,28 +8,33 @@ import 'package:provider/provider.dart';
 import 'package:fremo_app/utils/toast.dart';
 
 class MyInfoLogin extends StatelessWidget {
-  final overlayEntry = OverlayEntry(builder: (BuildContext context) {
-    return Positioned(
-      top: 0.0,
-      left: 0.0,
-      child: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: CircularProgressIndicator(),
-      ),
-    );
-  });
+  final OverlayEntry overlayEntry = OverlayEntry(
+    builder: (BuildContext context) {
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.7),
+        ),
+        width: 20.0,
+        height: 20.0,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    },
+  );
 
-  Future<void> userLogin(BuildContext context) async {
+  Future<bool> userLogin(BuildContext context) async {
     Overlay.of(context).insert(overlayEntry);
 
     try {
       User user = await googleLogin();
       context.read<UserProvider>().user = user;
+
+      return true;
     } on PlatformException catch (_) {
-      await displayToast("로그인에 실패했습니다.");
+      return false;
     } catch (_) {
-      await displayToast("로그인에 실패했습니다.");
+      return false;
     } finally {
       overlayEntry.remove();
     }
@@ -45,7 +50,9 @@ class MyInfoLogin extends StatelessWidget {
           child: ElevatedButton(
             child: Text("구글에 로그인"),
             onPressed: () async {
-              await userLogin(context);
+              if (!await userLogin(context)) {
+                await displayToast("로그인에 실패했습니다.");
+              }
             },
           ),
         )
