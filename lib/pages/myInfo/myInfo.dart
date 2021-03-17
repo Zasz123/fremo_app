@@ -31,6 +31,23 @@ class MyInfoScreen extends StatelessWidget {
     }
   }
 
+  Future<void> userLogin(BuildContext context) async {
+    Overlay.of(context).insert(loadingOverlayEntry);
+
+    try {
+      User user = await googleLogin();
+      context.read<UserProvider>().user = user;
+    } on PlatformException catch (e) {
+      debugPrint(e.toString());
+      displayToast("로그아웃에 실패했습니다.");
+    } catch (e) {
+      debugPrint(e.toString());
+      displayToast("로그아웃에 실패했습니다.");
+    } finally {
+      loadingOverlayEntry.remove();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     UserProvider _userProvider = Provider.of<UserProvider>(context);
@@ -53,7 +70,9 @@ class MyInfoScreen extends StatelessWidget {
                   ),
                 ],
               )
-            : MyInfoLogin(),
+            : MyInfoLogin(
+                userLogin: userLogin,
+              ),
       ),
     );
   }
