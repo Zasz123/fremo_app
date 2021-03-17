@@ -91,7 +91,7 @@ class _MyInfoFormState extends State<MyInfoForm> {
             height: 30.0,
           ),
           Container(
-            width: double.infinity,
+            alignment: Alignment.topRight,
             child: GestureDetector(
               onTap: () {
                 widget.userLogout(context);
