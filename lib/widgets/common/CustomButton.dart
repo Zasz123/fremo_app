@@ -18,12 +18,14 @@ class CustomDefaultButton extends StatelessWidget {
     return SizedBox(
       height: 40.0,
       width: fullWidth ? double.infinity : null,
-      child: RaisedButton(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          primary: Color(0xff95C7AE),
         ),
-        color: Color(0xff95C7AE),
         child: this.text != null
             ? Text(
                 this.text,
@@ -58,16 +60,18 @@ class CustomOutlineButton extends StatelessWidget {
     return SizedBox(
       height: 40.0,
       width: fullWidth ? double.infinity : null,
-      child: RaisedButton(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-          side: BorderSide(
-            color: Color(0xff95C7AE),
-            width: 2.5,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            side: BorderSide(
+              color: Color(0xff95C7AE),
+              width: 2.5,
+            ),
           ),
+          primary: Colors.white,
         ),
-        color: Colors.white,
         child: this.text != null
             ? Text(
                 this.text,

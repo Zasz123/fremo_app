@@ -9,8 +9,7 @@ class HomeArticlePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("dsa"),
-          RaisedButton(
+          ElevatedButton(
             child: Text("되돌리기"),
             onPressed: () {
               context.read<MemoProvider>().setCheckShowMemo = false;
