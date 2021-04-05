@@ -26,6 +26,7 @@ dependencies:
   provider: ^4.3.3
   http: ^0.13.0
   fluttertoast: ^7.1.8
+  flutter_secure_storage: ^4.1.0
 
   firebase_core: ^1.0.1
   firebase_auth: ^1.0.1
