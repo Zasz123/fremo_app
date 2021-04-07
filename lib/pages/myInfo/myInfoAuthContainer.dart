@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:fremo_app/utils/secureStorage.dart';
-
 import 'package:fremo_app/pages/myInfo/normalLogin.dart';
+import 'package:fremo_app/pages/myInfo/myInfoRegister.dart';
 
 import 'package:fremo_app/widgets/common/CustomWidgetWrapper.dart';
 import 'package:fremo_app/widgets/common/CustomButton.dart';
 
-class MyInfoLoginContainer extends StatelessWidget {
+class MyInfoAuthContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +36,15 @@ class MyInfoLoginContainer extends StatelessWidget {
           child: CustomOutlineButton(
             text: "회원가입",
             onPressed: () {
-              print("회원가입");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CustomPageRouteWrapper(
+                    title: "회원가입",
+                    child: MyInfoRegister(),
+                  ),
+                ),
+              );
             },
           ),
         ),

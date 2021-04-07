@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:fremo_app/providers/userProvider.dart';
 
-import 'package:fremo_app/pages/myInfo/myInfoLoginContainer.dart';
+import 'package:fremo_app/pages/myInfo/myInfoAuthContainer.dart';
 
 import 'package:fremo_app/widgets/common/CustomWidgetWrapper.dart';
 
@@ -30,7 +30,7 @@ class MyInfoPage extends StatelessWidget {
                   )
                 ],
               )
-            : MyInfoLoginContainer(),
+            : MyInfoAuthContainer(),
       ),
     );
   }
