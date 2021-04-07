@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:fremo_app/utils/apiHelper.dart';
+import 'package:fremo_app/utils/secureStorage.dart';
 
 import 'package:fremo_app/models/user.dart';
 
@@ -27,44 +30,78 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String> login(
+  Future<bool> login(
     String email,
     String password,
   ) async {
-    User accountInfo = new User(
-      email: email,
-      password: password,
-    );
+    try {
+      User accountInfo = new User(
+        email: email,
+        password: password,
+      );
 
-    final response = await APIHelper.requestPost(
-      path: "/user/login",
-      body: accountInfo.toMap(),
-    );
+      final response = await APIHelper.requestPost(
+        path: "/user/login",
+        body: accountInfo.toMap(),
+      );
 
-    print(response);
+      final responseData = jsonDecode(response.body);
 
-    return "";
+      final newToken = responseData['data']['token'];
+      final isSuccess = responseData['success'];
+
+      if (!isSuccess) {
+        return false;
+      }
+
+      await SecureStorageUtil.setData("token", newToken);
+      token = newToken;
+
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
   }
 
-  Future<String> register(
+  Future<bool> register(
     String email,
     String password,
     String nickName,
   ) async {
-    User newUser = new User(
-      email: email,
-      nickName: nickName,
-      password: password,
-    );
+    try {
+      User newUser = new User(
+        email: email,
+        nickName: nickName,
+        password: password,
+      );
 
-    final response = await APIHelper.requestPost(
-      path: "/user",
-      body: newUser.toMap(),
-    );
+      final response = await APIHelper.requestPost(
+        path: "/user",
+        body: newUser.toMap(),
+      );
 
-    print(response);
+      final responseData = jsonDecode(response.body);
 
-    return "dsa";
+      final newToken = responseData['data']['token'];
+      final isSuccess = responseData['success'];
+
+      if (isSuccess) {
+        return false;
+      }
+
+      await SecureStorageUtil.setData(
+        "token",
+        newToken,
+      );
+
+      token = newToken;
+
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
   }
 
   void logout() {
