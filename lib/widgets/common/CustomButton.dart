@@ -31,7 +31,7 @@ class CustomDefaultButton extends StatelessWidget {
                 this.text,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               )
@@ -77,7 +77,7 @@ class CustomOutlineButton extends StatelessWidget {
                 this.text,
                 style: TextStyle(
                   color: Color(0xff95C7AE),
-                  fontSize: 20.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               )
