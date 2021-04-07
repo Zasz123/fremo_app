@@ -6,18 +6,21 @@ class CustomInput extends StatelessWidget {
   final bool isPassword;
   final bool readOnly;
   final String initialValue;
+  final TextEditingController controller;
 
   CustomInput({
     this.validatorFunction,
     this.placeholder,
     this.readOnly = false,
     this.isPassword = false,
-    this.initialValue = "",
+    this.initialValue,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       initialValue: initialValue,
       readOnly: readOnly,
       obscureText: isPassword,
