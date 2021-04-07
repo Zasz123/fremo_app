@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _pageList = [
     HomePage(),
     MyMemo(),
-    MyInfoScreen(),
+    MyInfoPage(),
   ];
 
   void _onChangePage(int pagenIdex) {
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
   BottomNavigationBar _bottomNavbarBuilder() {
     return BottomNavigationBar(
       backgroundColor: Color(0xff8FBFA7),
-      selectedItemColor: Color(0xffe2e2e2),
+      selectedItemColor: Colors.white,
       unselectedItemColor: Color(0xffe2e2e2),
       elevation: 0.0,
       showSelectedLabels: false,
