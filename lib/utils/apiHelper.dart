@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:fremo_app/utils/secureStorage.dart';
 import 'package:http/http.dart' as http;
 
-String baseUrl = "localhost:4000";
+String baseUrl = "192.168.0.11:4000";
 
 class APIHelper {
   static final APIHelper _instance = APIHelper._();
@@ -16,12 +19,17 @@ class APIHelper {
     String path,
     Map<String, dynamic> parameters,
   }) async {
-    final url = Uri.http(baseUrl, path, parameters);
-    final headers = await getHeader();
+    try {
+      final url = Uri.http(baseUrl, path, parameters);
+      final headers = await getHeader();
 
-    final http.Response response = await http.get(url, headers: headers);
+      final http.Response response = await http.get(url, headers: headers);
 
-    return response;
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
   }
 
   static Future<http.Response> requestPost({
@@ -29,19 +37,28 @@ class APIHelper {
     Map<String, dynamic> parameters,
     Map<String, dynamic> body,
   }) async {
-    final url = Uri.http(baseUrl, path, parameters);
-    final headers = await getHeader();
+    try {
+      final url = Uri.http(baseUrl, path, parameters);
+      final headers = await getHeader();
 
-    final http.Response response =
-        await http.post(url, headers: headers, body: body);
+      final http.Response response =
+          await http.post(url, headers: headers, body: jsonEncode(body));
 
-    return response;
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
   }
 
   static Future<Map<String, String>> getHeader() async {
     final String token = await SecureStorageUtil.getData("token");
 
-    Map<String, String> headers = {"token": token};
+    Map<String, String> headers = {
+      "token": token,
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
     return headers;
   }
 }
