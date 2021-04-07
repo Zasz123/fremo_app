@@ -86,7 +86,7 @@ class UserProvider with ChangeNotifier {
       final newToken = responseData['data']['token'];
       final isSuccess = responseData['success'];
 
-      if (isSuccess) {
+      if (!isSuccess) {
         return false;
       }
 
