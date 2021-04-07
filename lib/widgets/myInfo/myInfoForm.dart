@@ -7,10 +7,6 @@ import 'package:fremo_app/widgets/common/CustomFormWidget.dart';
 import 'package:fremo_app/widgets/common/CustomButton.dart';
 
 class MyInfoForm extends StatefulWidget {
-  final Function(BuildContext context) userLogout;
-
-  MyInfoForm({@required this.userLogout});
-
   @override
   _MyInfoFormState createState() => _MyInfoFormState();
 }
@@ -92,12 +88,12 @@ class _MyInfoFormState extends State<MyInfoForm> {
           ),
           Container(
             alignment: Alignment.topRight,
-            child: GestureDetector(
-              onTap: () {
-                widget.userLogout(context);
-              },
-              child: Container(
-                height: 20.0,
+            child: Container(
+              height: 20.0,
+              child: InkWell(
+                onTap: () {
+                  context.read<UserProvider>().logout();
+                },
                 child: Text(
                   "로그아웃",
                   style: TextStyle(
