@@ -36,3 +36,46 @@ class CustomWidgetWrapper extends StatelessWidget {
     );
   }
 }
+
+class CustomSingleChildScrollView extends StatelessWidget {
+  final Widget child;
+
+  CustomSingleChildScrollView({this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(
+        vertical: 5.0,
+        horizontal: 10.0,
+      ),
+      child: child,
+    );
+  }
+}
+
+class CustomPageRouteWrapper extends StatelessWidget {
+  final String title;
+  final Widget child;
+
+  CustomPageRouteWrapper({
+    @required this.title,
+    @required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(this.title),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      body: CustomSingleChildScrollView(
+        child: CustomWidgetWrapper(
+          child: child,
+        ),
+      ),
+    );
+  }
+}
