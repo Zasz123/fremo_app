@@ -11,6 +11,9 @@ import 'package:fremo_app/pages/myInfo/myInfo.dart';
 
 import 'package:fremo_app/providers/userProvider.dart';
 import 'package:fremo_app/providers/memoProvider.dart';
+import 'package:fremo_app/providers/settingProvider.dart';
+
+import 'package:fremo_app/utils/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +22,7 @@ void main() async {
 
   UserProvider userProvider = UserProvider();
   MemoProvider memoProvider = MemoProvider();
+  SettingProvider settingProvider = SettingProvider(isLight: true);
 
   runApp(
     MultiProvider(
@@ -27,6 +31,7 @@ void main() async {
           create: (_) => userProvider,
         ),
         ChangeNotifierProvider(create: (_) => memoProvider),
+        ChangeNotifierProvider(create: (_) => settingProvider),
       ],
       child: MyApp(),
     ),
@@ -39,10 +44,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fremo App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xff95C7AE),
-      ),
+      theme: getThemeData(context.read<SettingProvider>().isLight),
       home: MyHomePage(),
     );
   }
@@ -136,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: _appBarBuilder(),
       body: _pageBuilder(_selectedPageIndex),
       bottomNavigationBar: _bottomNavbarBuilder(),
+      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 }
