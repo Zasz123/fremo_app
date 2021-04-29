@@ -24,7 +24,7 @@ class CustomDefaultButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
-          primary: Color(0xff95C7AE),
+          primary: Theme.of(context).primaryColor,
         ),
         child: this.text != null
             ? Text(
