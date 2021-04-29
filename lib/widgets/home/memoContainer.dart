@@ -48,7 +48,6 @@ class MemoContainer extends StatelessWidget {
           ),
           CustomInput(
             controller: commentController,
-            initialValue: "",
             placeholder: "따듯한 한마디를 남겨주세요.",
           ),
           CustomDefaultButton(
