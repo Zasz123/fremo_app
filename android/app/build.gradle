@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -56,8 +58,13 @@ android {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile  file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
+
+            if(Os.isFamily(Os.FAMILY_WINDOWS)) {
+                storeFile file(keystoreProperties['storeFile'])
+            } else if(Os.isFamily(Os.FAMILY_MAC)) {
+                storeFile file(keystoreProperties['storeFileMac'])
+            }
         }
     }
 
