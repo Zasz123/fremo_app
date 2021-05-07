@@ -51,6 +51,42 @@ class APIHelper {
     }
   }
 
+  static Future<http.Response> requestPatch({
+    String path,
+    Map<String, dynamic> parameters,
+    Map<String, dynamic> body,
+  }) async {
+    try {
+      final url = Uri.http(baseUrl, path, parameters);
+      final headers = await getHeader();
+
+      final http.Response response =
+          await http.patch(url, headers: headers, body: jsonEncode(body));
+
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  static Future<http.Response> requestDelete({
+    String path,
+    Map<String, dynamic> parameters,
+  }) async {
+    try {
+      final url = Uri.http(baseUrl, path, parameters);
+      final headers = await getHeader();
+
+      final http.Response response = await http.delete(url, headers: headers);
+
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
   static Future<Map<String, String>> getHeader() async {
     final String token = await SecureStorageUtil.getData("token");
 
