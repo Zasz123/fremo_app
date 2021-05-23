@@ -30,7 +30,6 @@ class _MyInfoRegisterState extends State<MyInfoRegister> {
           passwordController.text,
           nickNameController.text,
         );
-    print(registerResult);
 
     if (registerResult) {
       displayToast("회원가입에 성공하셨습니다!");
