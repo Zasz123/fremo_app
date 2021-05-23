@@ -19,4 +19,8 @@ class SecureStorageUtil {
   static Future<void> setData(String key, String value) async {
     await _storage.write(key: key, value: value);
   }
+
+  static Future<void> deleteData(String key) async {
+    await _storage.delete(key: key);
+  }
 }

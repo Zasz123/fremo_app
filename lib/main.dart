@@ -24,14 +24,20 @@ void main() async {
   MemoProvider memoProvider = MemoProvider();
   SettingProvider settingProvider = SettingProvider(isLight: true);
 
+  final String token = await SecureStorageUtil.getData("token");
+
+  if (token != null) {
+    userProvider.setUserInfo(token);
+  }
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(
           create: (_) => userProvider,
         ),
-        ChangeNotifierProvider(create: (_) => memoProvider),
-        ChangeNotifierProvider(create: (_) => settingProvider),
+        ChangeNotifierProvider<MemoProvider>(create: (_) => memoProvider),
+        ChangeNotifierProvider<SettingProvider>(create: (_) => settingProvider),
       ],
       child: MyApp(),
     ),

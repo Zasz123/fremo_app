@@ -72,7 +72,9 @@ class _NormalLoginState extends State<NormalLogin> {
               }
 
               final loginResult = await userProvider.login(
-                  emailController.text, passwordController.text);
+                emailController.text,
+                passwordController.text,
+              );
 
               if (loginResult) {
                 displayToast("로그인에 성공하셨습니다.");
@@ -80,6 +82,7 @@ class _NormalLoginState extends State<NormalLogin> {
 
                 return;
               }
+
               displayToast("로그인에 실패하셨습니다.");
             },
           )
