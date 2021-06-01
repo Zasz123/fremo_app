@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CustomWidgetWrapper extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry margin;
 
   CustomWidgetWrapper({
     this.child,
@@ -10,6 +11,7 @@ class CustomWidgetWrapper extends StatelessWidget {
       vertical: 30.0,
       horizontal: 20.0,
     ),
+    this.margin,
   });
 
   @override
@@ -32,6 +34,7 @@ class CustomWidgetWrapper extends StatelessWidget {
         ],
       ),
       padding: padding,
+      margin: margin,
       child: child,
     );
   }

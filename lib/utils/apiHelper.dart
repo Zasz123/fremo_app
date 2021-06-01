@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:fremo_app/utils/secureStorage.dart';
 import 'package:http/http.dart' as http;
 
-String baseUrl = "192.168.0.11:4000";
+String baseUrl = "10.0.2.2:4000";
 
 class APIHelper {
   static final APIHelper _instance = APIHelper._();

@@ -7,6 +7,7 @@ class CustomInput extends StatelessWidget {
   final bool readOnly;
   final String initialValue;
   final TextEditingController controller;
+  final bool isMultiline;
 
   CustomInput({
     this.validatorFunction,
@@ -15,11 +16,15 @@ class CustomInput extends StatelessWidget {
     this.isPassword = false,
     this.initialValue,
     this.controller,
+    this.isMultiline = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: isMultiline ? TextInputType.multiline : TextInputType.text,
+      minLines: 1,
+      maxLines: isMultiline ? 5 : 1,
       controller: controller,
       initialValue: initialValue,
       readOnly: readOnly,
