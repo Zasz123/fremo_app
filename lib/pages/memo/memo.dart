@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fremo_app/utils/toast.dart';
+import 'package:provider/provider.dart';
+
 import 'package:fremo_app/models/memo.dart';
 import 'package:fremo_app/providers/memoProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:fremo_app/providers/commentProvider.dart';
 
 import 'package:fremo_app/widgets/common/CustomFormWidget.dart';
 import 'package:fremo_app/widgets/common/CustomButton.dart';
@@ -13,6 +16,7 @@ class MemoPage extends StatefulWidget {
 
 class _MemoPageState extends State<MemoPage> {
   TextEditingController commentController;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -32,7 +36,25 @@ class _MemoPageState extends State<MemoPage> {
     commentController.dispose();
   }
 
-  void onCommentSubmit() {}
+  Future<void> onCommentSubmit(int memoId, String commentBody) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    CommentProvider commentProvider = context.read<CommentProvider>();
+
+    final isSuccess = await commentProvider.wrtierComment(memoId, commentBody);
+
+    if (!isSuccess) {
+      displayToast("한 마디 남기기 에러!");
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+
+    await context.read<MemoProvider>().getNewMemo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +93,10 @@ class _MemoPageState extends State<MemoPage> {
               ),
               CustomDefaultButton(
                 text: "한마디",
-                onPressed: onCommentSubmit,
+                onPressed: () => onCommentSubmit(
+                  memoProvider.memo.id,
+                  commentController.text,
+                ),
               ),
             ],
           );
