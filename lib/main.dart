@@ -11,6 +11,7 @@ import 'package:fremo_app/pages/myInfo/myInfo.dart';
 
 import 'package:fremo_app/providers/userProvider.dart';
 import 'package:fremo_app/providers/memoProvider.dart';
+import 'package:fremo_app/providers/commentProvider.dart';
 import 'package:fremo_app/providers/settingProvider.dart';
 
 import 'package:fremo_app/utils/theme.dart';
@@ -22,6 +23,7 @@ void main() async {
 
   UserProvider userProvider = UserProvider();
   MemoProvider memoProvider = MemoProvider();
+  CommentProvider commentProvider = CommentProvider();
   SettingProvider settingProvider = SettingProvider(isLight: true);
 
   final String token = await SecureStorageUtil.getData("token");
@@ -37,6 +39,7 @@ void main() async {
           create: (_) => userProvider,
         ),
         ChangeNotifierProvider<MemoProvider>(create: (_) => memoProvider),
+        ChangeNotifierProvider<CommentProvider>(create: (_) => commentProvider),
         ChangeNotifierProvider<SettingProvider>(create: (_) => settingProvider),
       ],
       child: MyApp(),
