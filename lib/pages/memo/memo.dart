@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fremo_app/utils/toast.dart';
+import 'package:fremo_app/widgets/memo/comment.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fremo_app/models/memo.dart';
 import 'package:fremo_app/providers/memoProvider.dart';
 import 'package:fremo_app/providers/commentProvider.dart';
-
-import 'package:fremo_app/widgets/common/CustomFormWidget.dart';
-import 'package:fremo_app/widgets/common/CustomButton.dart';
 
 class MemoPage extends StatefulWidget {
   @override
@@ -60,6 +58,7 @@ class _MemoPageState extends State<MemoPage> {
   Widget build(BuildContext context) {
     MemoProvider memoProvider = context.watch<MemoProvider>();
     Memo nowMemo = memoProvider.memo;
+    TextTheme textTheme = Theme.of(context).textTheme;
 
     return memoProvider.isLoading || nowMemo == null
         ? Text("로딩중")
@@ -68,35 +67,21 @@ class _MemoPageState extends State<MemoPage> {
             children: [
               Text(
                 nowMemo.title,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: textTheme.headline5,
               ),
               SizedBox(height: 20.0),
               Container(
                 child: Text(
                   nowMemo.body,
-                  style: TextStyle(
-                    fontSize: 16.0,
+                  style: textTheme.bodyText1.copyWith(
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
               SizedBox(height: 40.0),
-              CustomInput(
-                isMultiline: true,
-                controller: commentController,
-                placeholder: "따듯한 한마디를 남겨주세요.",
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              CustomDefaultButton(
-                text: "한마디",
-                onPressed: () => onCommentSubmit(
-                  memoProvider.memo.id,
-                  commentController.text,
-                ),
+              MemoComment(
+                commentController: commentController,
+                onCommentSubmit: onCommentSubmit,
               ),
             ],
           );
