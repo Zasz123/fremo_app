@@ -49,6 +49,7 @@ class _MemoPageState extends State<MemoPage> {
 
     setState(() {
       isLoading = false;
+      commentController.clear();
     });
 
     await context.read<MemoProvider>().getNewMemo();
