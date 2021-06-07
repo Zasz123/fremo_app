@@ -32,6 +32,12 @@ void main() async {
     userProvider.setUserInfo(token);
   }
 
+  try {
+    await memoProvider.fetchMemoMyList();
+  } catch (error) {
+    debugPrint(error.toString());
+  }
+
   runApp(
     MultiProvider(
       providers: [
